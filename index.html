@@ -13,10 +13,34 @@
             <header class="header-container">
                 <h1>Online Book Library</h1>
                 <div>
-                    <input class="bookBtns" type="button" id="addBook" name="addBook" value="Add Book" onclick="">
+                    <input class="bookBtns" type="button" id="addBook" name="addBook" value="Add Book" onclick="" data-modal-target="#modal">
+                    <div class="modal" id="modal">
+                        <div class="modal-header">
+                            <div class="modal-title">Add New Book</div>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="bookTitle" name="bookTitle" placeholder="Title">
+                            <input type="text" id="author" name="author" placeholder="Author">
+                            <input type="number" id="pages" name="pages" min="1" max="500" placeholder="Pages">
+                        </div>
+                    </div>
+                    <div id="overlay"></div>
                     <input class="bookBtns" type="button" id="removeBook" name="removeBook" value="Remove Book" onclick="">
                 </div>
             </header>
+            <div class="main-card-container">
+                <div class="card-container">
+                    <div class="bookTitle">
+                        <p>"Think Like a Programmer: An Introduction to Creative Problem Solving"</p>
+                    </div>
+                    <div class="bookAuthor">
+                        <p>V. Anton Spraul</p>
+                    </div>
+                    <div class="bookPages">
+                        <p>260 pages</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="/js/script.js" async defer></script>
     </body>
