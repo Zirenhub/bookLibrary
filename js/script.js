@@ -2,6 +2,8 @@ const openModalButton = document.querySelectorAll(
   '[data-modal-target]'
 );
 const overlay = document.getElementById('overlay');
+const bookStatus = document.getElementById('check7');
+const statusText = document.getElementById('statusText');
 
 openModalButton.forEach((button) => {
   button.addEventListener('click', () => {
@@ -15,6 +17,15 @@ overlay.addEventListener('click', () => {
   modals.forEach((modal) => {
     closeModal(modal);
   });
+});
+
+bookStatus.addEventListener('change', (e) => {
+  if (e.target.checked === true) {
+    statusText.textContent = 'Read.';
+  }
+  if (e.target.checked === false) {
+    statusText.textContent = 'Not read.';
+  }
 });
 
 function openModal(modal) {
