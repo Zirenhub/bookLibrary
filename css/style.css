@@ -101,6 +101,12 @@ body {
     outline: none;
 }
 
+.checkBookStatus {
+    padding-bottom: 10px;
+    justify-self: center;
+    align-self: center;
+}
+
 #confirmBook {
     appearance: none;
     background-color: #ffd231;
