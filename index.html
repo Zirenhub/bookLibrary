@@ -21,11 +21,17 @@
                     <div class="modal-header">
                         <div class="modal-title">Add New Book</div>
                     </div>
-                    <div class="modal-body">
-                        <input type="text" id="bookTitle" name="bookTitle" placeholder="Title">
-                        <input type="text" id="author" name="author" placeholder="Author">
-                        <input type="number" id="pages" name="pages" min="1" max="500" placeholder="Pages">
-                        <input type="button" id="confirmBook" name="confirmBook" value="Submit">
+                    <div>
+                        <form class="modal-body">
+                            <input type="text" id="bookTitle" name="bookTitle" placeholder="Title" required>
+                            <input type="text" id="author" name="author" placeholder="Author" required>
+                            <input type="number" id="pages" name="pages" min="1" max="500" placeholder="Pages" required>
+                            <div class="checkBookStatus">
+                                <span>Have you read this book?</span>
+                                <input type="checkbox" id="addReadStatus" name="addReadStatus">
+                            </div>
+                            <input type="submit" id="confirmBook" name="confirmBook" value="Submit"">
+                        </form>
                     </div>
                 </div>
                 <div id="overlay"></div>
