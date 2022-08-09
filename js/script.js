@@ -49,10 +49,7 @@ function closeModal(modal) {
 
 let myLibrary = [];
 
-let bookDiv = document.createElement('div');
-bookDiv.classList.add('card-container');
-
-function displayBooks() {
+function displayBooks(bookDiv) {
   for (let i = 0; i <= myLibrary.length; i++) {
     cardBody.append(bookDiv);
   }
@@ -62,27 +59,28 @@ function Book(title, author, pages) {
   this.title = title.value;
   this.author = author.value;
   this.pages = pages.value;
+  this.styling = function (bookDiv) {
+    let titleCreate = document.createElement('div');
+    titleCreate.classList.add('bookTitle');
+    let titleText = document.createElement('p');
+    titleText.textContent = '"' + this.title + '"';
+    titleCreate.appendChild(titleText);
+    bookDiv.appendChild(titleCreate);
 
-  let titleCreate = document.createElement('div');
-  titleCreate.classList.add('bookTitle');
-  let titleText = document.createElement('p');
-  titleText.textContent = '"' + this.title + '"';
-  titleCreate.appendChild(titleText);
-  bookDiv.appendChild(titleCreate);
+    let authorCreate = document.createElement('div');
+    authorCreate.classList.add('bookAuthor');
+    let authorText = document.createElement('p');
+    authorText.textContent = this.author;
+    authorCreate.appendChild(authorText);
+    bookDiv.appendChild(authorCreate);
 
-  let authorCreate = document.createElement('div');
-  authorCreate.classList.add('bookAuthor');
-  let authorText = document.createElement('p');
-  authorText.textContent = this.author;
-  authorCreate.appendChild(authorText);
-  bookDiv.appendChild(authorCreate);
-
-  let pagesCreate = document.createElement('div');
-  pagesCreate.classList.add('bookPages');
-  let pagesNum = document.createElement('p');
-  pagesNum.textContent = this.pages + ' pages';
-  pagesCreate.appendChild(pagesNum);
-  bookDiv.appendChild(pagesCreate);
+    let pagesCreate = document.createElement('div');
+    pagesCreate.classList.add('bookPages');
+    let pagesNum = document.createElement('p');
+    pagesNum.textContent = this.pages + ' pages';
+    pagesCreate.appendChild(pagesNum);
+    bookDiv.appendChild(pagesCreate);
+  };
 }
 
 // let title = '';
@@ -101,9 +99,14 @@ function addBookToLibrary() {
   // console.log(pages.value);
   // console.log(isBookRead.checked);
 
+  let bookDiv = document.createElement('div');
+  bookDiv.classList.add('card-container');
+
   let newBook = new Book(title, author, pages);
   myLibrary.push(newBook);
-  displayBooks();
+  newBook.styling(bookDiv);
+  displayBooks(bookDiv);
+
   console.log(newBook);
 
   // closeModal(modal);
