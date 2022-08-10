@@ -5,6 +5,13 @@ const overlay = document.getElementById('overlay');
 const form = document.querySelector('.modal-body');
 const cardBody = document.querySelector('.main-card-container');
 const readCheckStyle = document.querySelector('.checkbox');
+const demoCardRead = document.getElementById('check7');
+
+demoCardRead.addEventListener('click', (e) => {
+  let span = e.target.nextElementSibling;
+  let parent = e.currentTarget.parentNode;
+  changeReadText(span, parent);
+});
 
 openModalButton.forEach((button) => {
   button.addEventListener('click', () => {
@@ -22,10 +29,12 @@ overlay.addEventListener('click', () => {
 
 readCheckStyle.style.backgroundColor = '#fa8e8e';
 
-function changeReadText(span) {
+function changeReadText(span, parent) {
   if (span.textContent === 'Not read.') {
+    parent.style.backgroundColor = '#b5cbbb';
     span.textContent = 'Read.';
   } else if (span.textContent === 'Read.') {
+    parent.style.backgroundColor = '#fa8e8e';
     span.textContent = 'Not read.';
   }
 }
@@ -49,15 +58,15 @@ function closeModal(modal) {
 
 let myLibrary = [];
 
-function changeRead() {
+function changeRead(readChange) {
   readChange.addEventListener('change', (e) => {
     let span = e.target.nextElementSibling;
-    // changeReadText(span);
-    console.log(span);
+    let parent = e.currentTarget.parentNode;
+    changeReadText(span, parent);
   });
 }
 
-function displayBooks(bookDiv, newBook) {
+function displayBooks(bookDiv) {
   let temp = bookDiv.children[3];
   let tempStyle = temp.children[0];
   let tempText = tempStyle.children[1];
@@ -81,8 +90,8 @@ function Book(title, author, pages, isBookRead) {
   this.isBookRead = isBookRead;
 }
 
-Book.prototype.bookReadStatus = function () {
-  let readChange = document.querySelector('.check');
+Book.prototype.bookReadStatus = function (children) {
+  let readChange = children;
   changeRead(readChange);
 };
 
@@ -135,6 +144,10 @@ function addBookToLibrary() {
   let newBook = new Book(title, author, pages, isBookRead);
   myLibrary.push(newBook);
   newBook.styling(bookDiv);
+
+  let children = bookDiv.querySelector('.check');
+  newBook.bookReadStatus(children);
+
   displayBooks(bookDiv, newBook);
 
   console.log(newBook);
