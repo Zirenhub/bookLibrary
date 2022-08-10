@@ -1,11 +1,39 @@
 const openModalButton = document.querySelectorAll(
   '[data-modal-target]'
 );
+const removeBookButton = document.querySelector('#removeBook');
 const overlay = document.getElementById('overlay');
 const form = document.querySelector('.modal-body');
 const cardBody = document.querySelector('.main-card-container');
 const readCheckStyle = document.querySelector('.checkbox');
 const demoCardRead = document.getElementById('check7');
+
+removeBookButton.addEventListener('click', () => {
+  let allCards = document.querySelectorAll('.card-container');
+  document.getElementById('addBook').disabled = true;
+
+  if (removeBookButton.value === 'Cancel ?') {
+    document.getElementById('addBook').disabled = false;
+    allCards.forEach((item) => {
+      item.classList.remove('active');
+    });
+    removeBookButton.value = 'Remove Book';
+    return;
+  } else {
+    removeBookButton.value = 'Cancel ?';
+  }
+
+  allCards.forEach((item) => {
+    item.classList.add('active');
+    item.addEventListener('click', (e) => {
+      if (e.target.classList.value === 'card-container active') {
+        e.target.remove();
+        item.classList.remove('active');
+        document.getElementById('addBook').disabled = false;
+      }
+    });
+  });
+});
 
 demoCardRead.addEventListener('click', (e) => {
   let span = e.target.nextElementSibling;
