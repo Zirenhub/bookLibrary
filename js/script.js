@@ -111,54 +111,53 @@ function displayBooks(bookDiv) {
   }
 }
 
-function Book(title, author, pages, isBookRead) {
-  this.title = title.value;
-  this.author = author.value;
-  this.pages = pages.value;
-  this.isBookRead = isBookRead;
+class Book {
+  constructor(title, author, pages, isBookRead) {
+    this.title = title.value;
+    this.author = author.value;
+    this.pages = pages.value;
+    this.isBookRead = isBookRead;
+  }
+
+  styling(bookDiv) {
+    let titleCreate = document.createElement('div');
+    titleCreate.classList.add('bookTitle');
+    let titleText = document.createElement('p');
+    titleText.textContent = '"' + this.title + '"';
+    titleCreate.appendChild(titleText);
+    bookDiv.appendChild(titleCreate);
+    let authorCreate = document.createElement('div');
+    authorCreate.classList.add('bookAuthor');
+    let authorText = document.createElement('p');
+    authorText.textContent = this.author;
+    authorCreate.appendChild(authorText);
+    bookDiv.appendChild(authorCreate);
+    let pagesCreate = document.createElement('div');
+    pagesCreate.classList.add('bookPages');
+    let pagesNum = document.createElement('p');
+    pagesNum.textContent = this.pages + ' pages';
+    pagesCreate.appendChild(pagesNum);
+    bookDiv.appendChild(pagesCreate);
+    let bookReadDiv = document.createElement('div');
+    bookReadDiv.classList.add('readStatus');
+    let checkBoxDiv = document.createElement('div');
+    checkBoxDiv.classList.add('checkbox');
+    let checkInput = document.createElement('input');
+    checkInput.setAttribute('type', 'checkbox');
+    checkInput.classList.add('check');
+    checkBoxDiv.appendChild(checkInput);
+    let bookReadText = document.createElement('span');
+    bookReadText.textContent = 'Not read.';
+    checkBoxDiv.appendChild(bookReadText);
+    bookReadDiv.appendChild(checkBoxDiv);
+    bookDiv.appendChild(bookReadDiv);
+  }
+
+  bookReadStatus(children) {
+    let readChange = children;
+    changeRead(readChange);
+  }
 }
-
-Book.prototype.bookReadStatus = function (children) {
-  let readChange = children;
-  changeRead(readChange);
-};
-
-Book.prototype.styling = function (bookDiv) {
-  let titleCreate = document.createElement('div');
-  titleCreate.classList.add('bookTitle');
-  let titleText = document.createElement('p');
-  titleText.textContent = '"' + this.title + '"';
-  titleCreate.appendChild(titleText);
-  bookDiv.appendChild(titleCreate);
-
-  let authorCreate = document.createElement('div');
-  authorCreate.classList.add('bookAuthor');
-  let authorText = document.createElement('p');
-  authorText.textContent = this.author;
-  authorCreate.appendChild(authorText);
-  bookDiv.appendChild(authorCreate);
-
-  let pagesCreate = document.createElement('div');
-  pagesCreate.classList.add('bookPages');
-  let pagesNum = document.createElement('p');
-  pagesNum.textContent = this.pages + ' pages';
-  pagesCreate.appendChild(pagesNum);
-  bookDiv.appendChild(pagesCreate);
-
-  let bookReadDiv = document.createElement('div');
-  bookReadDiv.classList.add('readStatus');
-  let checkBoxDiv = document.createElement('div');
-  checkBoxDiv.classList.add('checkbox');
-  let checkInput = document.createElement('input');
-  checkInput.setAttribute('type', 'checkbox');
-  checkInput.classList.add('check');
-  checkBoxDiv.appendChild(checkInput);
-  let bookReadText = document.createElement('span');
-  bookReadText.textContent = 'Not read.';
-  checkBoxDiv.appendChild(bookReadText);
-  bookReadDiv.appendChild(checkBoxDiv);
-  bookDiv.appendChild(bookReadDiv);
-};
 
 function addBookToLibrary() {
   let title = document.querySelector('#bookTitle');
